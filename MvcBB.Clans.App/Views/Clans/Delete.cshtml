@@ -1,0 +1,36 @@
+@model ClanDto
+@{
+    ViewData["Title"] = "Delete Clan";
+}
+
+<h1>Delete Clan</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="col-md-6">
+    <p>
+        You're deleting <strong>@Model.Name</strong>, which has
+        @Model.MemberCount @(Model.MemberCount == 1 ? "member" : "members").
+        This can't be undone.
+    </p>
+
+    @if (Model.MemberCount > 0)
+    {
+        <p>
+            To keep the clan's members but hide the clan, <a asp-action="Edit" asp-route-id="@Model.Id">edit it</a>
+            and untick "Active" instead.
+        </p>
+        <div class="form-check mb-3">
+            <input type="checkbox" id="removeMembers" name="removeMembers" value="true" class="form-check-input" required />
+            <label for="removeMembers" class="form-check-label">
+                Also remove @Model.MemberCount @(Model.MemberCount == 1 ? "membership" : "memberships"). Those members will have no clan.
+            </label>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-danger">Delete Clan</button>
+    <a asp-action="Manage" class="btn btn-outline-secondary">Cancel</a>
+</form>

@@ -1,0 +1,9 @@
+@model ClanDto
+@* Icon next to "I am a/an {Name}." Everything is encoded by Razor. *@
+<span class="clan-badge">
+    @if (Model.IconUrl != null)
+    {
+        <img src="@Model.IconUrl" alt="" title="@Model.Name" class="clan-icon" loading="lazy" />
+    }
+    <span class="clan-statement">@Model.Statement</span>
+</span>

@@ -1,0 +1,76 @@
+@model IReadOnlyList<ClanDto>
+@{
+    ViewData["Title"] = "Clans";
+    var myClanId = ViewBag.MyClanId as int?;
+    var myClan = Model.FirstOrDefault(c => c.Id == myClanId);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Clans</h1>
+    <div>
+        <a asp-action="Choose" class="btn btn-primary"><i class="bi bi-flag"></i> @(myClanId.HasValue ? "Change my clan" : "Choose a clan")</a>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-action="Manage" class="btn btn-outline-secondary"><i class="bi bi-gear"></i> Manage clans</a>
+        }
+    </div>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (myClan != null)
+{
+    <p class="lead"><partial name="~/Views/Clans/Slots/_ClanBadge.cshtml" model="myClan" /></p>
+}
+else if (myClanId.HasValue)
+{
+    <p class="text-muted">Your clan isn't active at the moment, so it isn't shown on your posts. You can choose another one.</p>
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">There are no clans yet.</p>
+}
+else
+{
+    <div class="card">
+        <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Clan</th>
+                        <th class="text-end">Members</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var clan in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="clan-badge">
+                                    @if (clan.IconUrl != null)
+                                    {
+                                        <img src="@clan.IconUrl" alt="" class="clan-choice-icon" />
+                                    }
+                                    <span>@clan.Name</span>
+                                    @if (clan.Id == myClanId)
+                                    {
+                                        <span class="badge bg-primary">Your clan</span>
+                                    }
+                                </span>
+                            </td>
+                            <td class="text-end">@clan.MemberCount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

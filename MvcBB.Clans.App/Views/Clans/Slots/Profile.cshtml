@@ -1,0 +1,19 @@
+@model ProfileClanModel
+<div class="clan-profile mb-3">
+    @if (Model.Clan != null)
+    {
+        <partial name="~/Views/Clans/Slots/_ClanBadge.cshtml" model="Model.Clan" />
+    }
+    else
+    {
+        <span class="text-muted small">You haven't chosen a clan.</span>
+    }
+    @if (Model.IsOwnProfile)
+    {
+        <div>
+            <a asp-controller="Clans" asp-action="Choose" class="small">
+                @(Model.Clan != null ? "Change clan" : "Choose a clan")
+            </a>
+        </div>
+    }
+</div>

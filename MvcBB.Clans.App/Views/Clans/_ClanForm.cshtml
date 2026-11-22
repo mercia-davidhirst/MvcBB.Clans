@@ -1,0 +1,47 @@
+@model ClanFormModel
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" maxlength="100" required />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="ArticleMode" class="form-label"></label>
+    <select asp-for="ArticleMode" class="form-select">
+        <option value="auto">Automatic ("an" before a vowel, otherwise "a")</option>
+        <option value="a">Always "a" (for example, a Unicorn)</option>
+        <option value="an">Always "an" (for example, an Honour Guard)</option>
+        <option value="none">None (for example, I am Legion)</option>
+    </select>
+    <small class="form-text text-muted">Used in "I am a/an ..." on posts and profiles.</small>
+</div>
+<div class="mb-3">
+    <label asp-for="SortOrder" class="form-label"></label>
+    <input asp-for="SortOrder" class="form-control" style="max-width: 120px;" />
+    <span asp-validation-for="SortOrder" class="text-danger"></span>
+</div>
+<div class="form-check mb-3">
+    <input asp-for="IsActive" class="form-check-input" />
+    <label asp-for="IsActive" class="form-check-label"></label>
+</div>
+<div class="mb-3">
+    <label asp-for="Icon" class="form-label"></label>
+    @if (Model.CurrentIconUrl != null)
+    {
+        <div class="mb-2">
+            <img src="@Model.CurrentIconUrl" alt="Current icon" class="clan-admin-icon" />
+        </div>
+        <div class="form-check mb-2">
+            <input asp-for="RemoveIcon" class="form-check-input" />
+            <label asp-for="RemoveIcon" class="form-check-label"></label>
+        </div>
+    }
+    <input asp-for="Icon" type="file" class="form-control" accept=".png,.jpg,.jpeg,.gif,.webp" />
+    <small class="form-text text-muted">
+        PNG, JPG, GIF or WebP, up to 256 KB. Shown at about 20 pixels.
+        @if (Model.CurrentIconUrl != null)
+        {
+            <text>Choosing a file replaces the current icon.</text>
+        }
+    </small>
+</div>

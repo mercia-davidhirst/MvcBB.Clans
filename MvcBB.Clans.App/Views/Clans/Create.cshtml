@@ -1,0 +1,12 @@
+@model ClanFormModel
+@{
+    ViewData["Title"] = "Add Clan";
+}
+
+<h1>Add Clan</h1>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="col-md-6">
+    <partial name="~/Views/Clans/_ClanForm.cshtml" model="Model" />
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a asp-action="Manage" class="btn btn-outline-secondary">Cancel</a>
+</form>

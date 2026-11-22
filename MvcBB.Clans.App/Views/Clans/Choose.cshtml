@@ -1,0 +1,38 @@
+@model IReadOnlyList<ClanDto>
+@{
+    ViewData["Title"] = "Choose a Clan";
+    var myClanId = ViewBag.MyClanId as int?;
+    var myClanIsActive = myClanId.HasValue && Model.Any(c => c.Id == myClanId);
+}
+
+<h1>Choose a Clan</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<p>Your clan is shown under your name on your posts and on your profile.</p>
+
+<form asp-action="Choose" method="post" class="col-md-8 col-lg-6">
+    <div class="list-group mb-3">
+        @foreach (var clan in Model)
+        {
+            <label class="list-group-item d-flex align-items-center gap-2">
+                <input class="form-check-input me-1" type="radio" name="clanId" value="@clan.Id" checked="@(clan.Id == myClanId)" />
+                @if (clan.IconUrl != null)
+                {
+                    <img src="@clan.IconUrl" alt="" class="clan-choice-icon" />
+                }
+                <span>@clan.Name</span>
+                <small class="text-muted ms-auto">@clan.MemberCount @(clan.MemberCount == 1 ? "member" : "members")</small>
+            </label>
+        }
+        <label class="list-group-item d-flex align-items-center gap-2">
+            <input class="form-check-input me-1" type="radio" name="clanId" value="" checked="@(!myClanIsActive)" />
+            <span class="text-muted">No clan</span>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
