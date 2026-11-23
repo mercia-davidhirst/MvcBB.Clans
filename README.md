@@ -175,3 +175,14 @@ Optional, in MvcBB.App's configuration:
 
 If a web server or CDN in front of MvcBB.App serves `/images/` directly from
 disk, exclude `/images/clans/` so requests reach MvcBB.App.
+
+## Upgrading to 1.0.1
+
+1.0.1 is a bug-fix release. Replace both DLLs and restart both processes.
+
+- Success and error messages on the Clans pages (the clan list, choosing a
+  clan, and managing or deleting clans) showed twice, because the pages
+  repeated the messages core's layout already shows at the top of every
+  page. They now show once.
+- MvcBB.API re-runs the mod's install step because the version changed. It
+  makes no schema changes in this release.

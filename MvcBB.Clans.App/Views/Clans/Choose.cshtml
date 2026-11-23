@@ -7,11 +7,6 @@
 
 <h1>Choose a Clan</h1>
 
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
-
 <p>Your clan is shown under your name on your posts and on your profile.</p>
 
 <form asp-action="Choose" method="post" class="col-md-8 col-lg-6">

@@ -9,7 +9,7 @@ namespace MvcBB.Clans.Api
     {
         public string Id => "clans";
         public string Name => "Clans";
-        public string Version => "1.0.0";
+        public string Version => "1.0.1";
 
         // Needs core's view slots, added in ModKit 1.1.0.
         public string MinCoreVersion => "1.1.0";

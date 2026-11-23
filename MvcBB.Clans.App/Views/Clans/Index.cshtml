@@ -16,15 +16,6 @@
     </div>
 </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
-
 @if (myClan != null)
 {
     <p class="lead"><partial name="~/Views/Clans/Slots/_ClanBadge.cshtml" model="myClan" /></p>

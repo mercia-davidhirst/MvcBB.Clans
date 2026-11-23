@@ -8,15 +8,6 @@
     <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add Clan</a>
 </div>
 
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
-}
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">@TempData["Error"]</div>
-}
-
 <div class="card">
     <div class="table-responsive">
         <table class="table table-striped align-middle mb-0">
